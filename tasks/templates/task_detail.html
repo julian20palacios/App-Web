@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-4">              
+            <h1>{{task.title}}</h1>
+            {{error}}  
+            <form method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button class="btn btn-dark btn-sm">
+                    Actualizar
+                </button>
+                <button class="btn btn-dark btn-sm">
+                    Completar
+                </button>
+                <button  class="btn btn-danger btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#eliminarTarea">
+                    Eliminar
+                   </button>
+            </form>
+         </div>
+     </div>
+    </main>
+    <!-- Modal -->
+    <div class="modal fade" id="eliminarTarea" tabindex="-1" aria-labelledby="eliminarTareaLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="eliminarTareaLabel">Eliminar Tarea</h5>
+            <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ¿Estás seguro de que deseas eliminar esta tarea?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+            <form action="{% url 'eliminar_tarea' task.pk %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% endblock %}

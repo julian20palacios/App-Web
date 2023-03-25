@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<main class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-4 mt-5">
+            <form action="/crearproveedor/" method="POST" class="card card-body">
+                <h1>Crear Proveedor</h1>
+                {{error}}
+                {% csrf_token %}
+                {{form.as_p}}
+                <button class="btn btn-dark btn-sm">
+                    Guardar    
+                </button>
+                <a href="{% url 'vendor' %}" class="btn btn-secondary btn-sm">Cancelar</a>
+            </form>
+
+        </div>
+
+    </div>  
+</main>
+{% endblock %}

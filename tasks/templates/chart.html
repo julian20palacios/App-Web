@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<DIr></DIr>
+<div>
+  <a href="{% url 'product_vendor' %}" class="btn btn-outline-secondary ml-auto">
+    Regresar
+  </a>
+</div>
+<div class="d-flex justify-content-center my-card-width">
+  <div class="card mx-auto">
+    <div class="card-header text-center">
+      Análisis de precios por proveedor
+    </div>
+    <div class="card-body">
+      <canvas id="myChart" width="1200" height="500"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- Importar la librería de Chart.js -->
+<link rel="stylesheet" type="text/css" href="{% static 'grafica.css' %}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Script de Chart.js -->
+<script type="application/javascript">
+    // Obtener los datos de los productos del proveedor
+    fetch("{% url 'analisis_datos' %}")
+    .then(response => response.json())
+    .then(data => {
+    // Convertir los datos a dos listas para el gráfico
+    var proveedores = data.productos.map(producto => producto.proveedor);
+    var precios = data.productos.map(producto => producto.precio)
+
+        // Definir una lista de colores
+        var colors = [  'rgba(54, 162, 235, 0.2)',  'rgba(255, 99, 132, 0.2)',  'rgba(255, 206, 86, 0.2)',  'rgba(75, 192, 192, 0.2)',  'rgba(153, 102, 255, 0.2)',  'rgba(255, 159, 64, 0.2)',  'rgba(255, 0, 0, 0.2)',  'rgba(0, 255, 0, 0.2)',  'rgba(0, 0, 255, 0.2)',  'rgba(255, 255, 0, 0.2)',  'rgba(255, 0, 255, 0.2)',  'rgba(0, 255, 255, 0.2)',  'rgba(128, 0, 0, 0.2)',  'rgba(0, 128, 0, 0.2)',  'rgba(0, 0, 128, 0.2)',  'rgba(128, 128, 0, 0.2)',  'rgba(128, 0, 128, 0.2)',  'rgba(0, 128, 128, 0.2)',  'rgba(128, 128, 128, 0.2)',  'rgba(255, 128, 0, 0.2)',  'rgba(0, 255, 128, 0.2)',  'rgba(128, 0, 255, 0.2)',  'rgba(255, 0, 128, 0.2)',  'rgba(128, 255, 0, 0.2)',  'rgba(0, 128, 255, 0.2)',  'rgba(255, 128, 128, 0.2)',  'rgba(128, 255, 128, 0.2)',  'rgba(128, 128, 255, 0.2)',  'rgba(255, 255, 128, 0.2)',  'rgba(255, 128, 255, 0.2)',  'rgba(128, 255, 255, 0.2)',  'rgba(192, 192, 192, 0.2)',  'rgba(255, 255, 255, 0.2)',  'rgba(0, 0, 0, 0.2)'];
+        // Asignar los colores a los datos del gráfico
+        var myChart = new Chart(document.getElementById('myChart'), {
+            type: 'bar',
+            data: {
+                labels: proveedores,
+                datasets: [{
+                    label: 'Precio por proveedor (USD)',
+                    data: precios,
+                    backgroundColor: colors.slice(0, precios.length),
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    });
+</script>
+
+
+{% endblock %}

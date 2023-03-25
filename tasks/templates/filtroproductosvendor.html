@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'styleoc.css' %}">
+<div class="container">
+  <h1 class="text-center mb-4">Productos de Pareto de Procurement...</h1>
+
+  <div class="d-flex mb-4 align-items-center">
+    <a href="{% url 'productos/modelos' %}" class="btn btn-outline-secondary ml-auto">
+      Ver Pareto...
+    </a>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-striped">
+        <thead>
+          
+          <tr>
+            <td>Producto</td>
+            <th>Proveedor</th> 
+            <th>Precio</th>
+            <th>Cantidad Disponible</th>
+            <th>UPC</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for producto in productos %}
+          <tr {% if forloop.first %} class=" table-danger my-custom-style" {% endif %}>
+            <td>{{ producto.nombre }}</td>
+            <td>{{ producto.proveedor }}</td>
+            <td>{{ producto.precio }}</td>
+            <td>{{ producto.cantidad_disponible }}</td>
+            <td>{{ producto.upc }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

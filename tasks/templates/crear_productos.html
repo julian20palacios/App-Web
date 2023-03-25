@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Crear Producto</h3>
+                </div>
+                <div class="card-body">
+                    <form action="/crearproducto/" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="{{ form.nombre_producto.id_for_label }}">Nombre del producto:</label>
+                            {{ form.nombre_producto }}
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="{{ form.sku.id_for_label }}">SKU:</label>
+                                {{ form.sku }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="{{ form.upc.id_for_label }}">UPC:</label>
+                                {{ form.upc }}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="{{ form.precio_usd.id_for_label }}">Precio en USD:</label>
+                                {{ form.precio_usd }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="{{ form.arancel.id_for_label }}">Arancel:</label>
+                                {{ form.arancel }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.categoria.id_for_label }}">Categoría:</label>
+                            {{ form.categoria }}
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.marca.id_for_label }}">Marca:</label>
+                            {{ form.marca }}
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.proveedor_sugerido.id_for_label }}">Proveedor sugerido:</label>
+                            {{ form.proveedor_sugerido }}
+                        </div>
+                        <div class="form-group form-check">
+                            {{ form.check_importante }}
+                            <label class="form-check-label" for="{{ form.check_importante.id_for_label }}">Importante</label>
+                        </div>
+                        <button type="submit" class="btn btn-dark btn-sm">Guardar</button>
+                        <a href="{% url 'productos' %}" class="btn btn-secondary btn-sm">Cancelar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

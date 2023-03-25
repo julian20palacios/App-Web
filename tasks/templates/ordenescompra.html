@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main class="container">
+    <div class="row">
+        <h1 class="text-center">Listado de Ordenes de Compra</h1>
+        <div class="col-md-12">          
+            <div class="mb-4 dropdown">
+                <button class="btn btn-secondary  dropdown-toggle" type="button" id="opciones-producto" data-bs-toggle="dropdown" aria-expanded="false">
+                    Opciones de Orden
+                </button>
+                <ul class="dropdown-menu dropdown-menu-sm" aria-labelledby="opciones-producto">
+                    <li><a class="dropdown-item dropdown-item-sm" href="{% url 'crear_orden_compra' %}">Crear Orden</a></li>
+                    <li><a class="dropdown-item dropdown-item-sm" href="{% url 'exportarcom' %}">Exportar Ordenes</a></li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Número de orden de compra</th>
+                                <th>Proveedor</th> 
+                                <th>Valor Total</th>                                                            
+                                <th>Acciones</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for orden in compraorden %}
+                            <tr>
+                                <td>{{ orden.numero_orden_compra }}</td>
+                                <td><a href="{% url 'detalle_proveedor' orden.proveedor.pk %}" class="text-decoration-none text-reset">{{ orden.proveedor }}</a></td>
+
+                                <td>{{ orden.precio_producto }}</td>                                                           
+                                <td>
+                                    <a href="{% url 'detalle_orden_compra' orden.pk %}" class="btn btn-secondary btn-sm">Ver detalles</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>           
+    </div> 
+</main>
+{% endblock %}    
+

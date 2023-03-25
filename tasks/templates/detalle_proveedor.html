@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="text-center">{{vendor.company_name}}</h1>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="text-muted">Información General</h3>
+                    <p><strong>Nombre de la compañía:</strong> {{vendor.company_name}}</p>
+                    <p><strong>ID de impuestos:</strong> {{vendor.tax_id}}</p>
+                    <p><strong>Límite de crédito:</strong> ${{vendor.credit_limit}}</p>
+                    <p><strong>Dirección:</strong> {{vendor.address}}</p>
+                    <p><strong>Correo electrónico:</strong> {{vendor.email}}</p>
+                    <p><strong>Nombre de contacto:</strong> {{vendor.contact_name}}</p>
+                    <p><strong>Teléfono de contacto:</strong> {{vendor.contact_number}}</p>
+                    <p><strong>Sitio web:</strong> <a href="{{vendor.website}}">{{vendor.website}}</a></p>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="text-muted">Información Adicional</h3>
+                    <p><strong>Ciudad:</strong> {{vendor.city}}</p>
+                    <p><strong>País:</strong> {{vendor.country}}</p>
+                    <p><strong>Método de entrega:</strong> {{vendor.delivery_method}}</p>
+                    <p><strong>Marca potencial:</strong> {{vendor.potential_brand}}</p>
+                    <p><strong>Categoría potencial:</strong> {{vendor.potential_category}}</p>
+                    <p><strong>Oportunidad de precio:</strong> {{vendor.price_opportunity}}</p>
+                    <p><strong>Productos destacados:</strong> {{vendor.featured_products}}</p>
+                    <p><strong>Verificación de crédito:</strong> <input type="checkbox" name="credit_check" {% if vendor.credit_check %}checked{% endif %}></p>
+                    <p><strong>Verificación de documentos:</strong> <input type="checkbox" name="document_check" {% if vendor.document_check %}checked{% endif %}></p>
+                    <p><strong>Verificación de factoring:</strong> <input type="checkbox" name="factoring_check" {% if vendor.factoring_check %}checked{% endif %}></p>
+                    <p><strong>Importante:</strong> <input type="checkbox" name="is_important" {% if vendor.is_important %}checked{% endif %}></p>
+                    <p><strong>Comprado:</strong> <input type="checkbox" name="is_purchased" {% if vendor.is_purchased %}checked{% endif %}></p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <a href="{% url 'vendor' %}" class="btn btn-secondary btn-sm">Regresar</a>
+                    
+                    <button class="btn btn-danger btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#eliminarVendor">Eliminar</button>
+                </div>
+        </div>
+    </div>
+</main>
+
+<!-- Modal -->
+<div class="modal fade" id="eliminarVendor" tabindex="-1" aria-labelledby="eliminarProductoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="eliminarProductoLabel">Eliminar Proveedor</h5>
+          <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ¿Estás seguro de que deseas eliminar este Proveedor?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+          <form action="{% url 'eliminar_vendor' vendor.pk %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
+
+{% endblock %}

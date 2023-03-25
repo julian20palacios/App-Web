@@ -1,0 +1,15 @@
+.persona-item {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 2s ease-in-out;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+    background-color: #fff;
+  }
+  
+  .persona-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+
+  

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'styleoc.css' %}">
+<div class="container">
+  <h1 class="my-4">Orden de Compra {{ orden_compra.numero_orden_compra }}</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Proveedor</h2>
+      <ul class="list-group">
+        <li class="list-group-item"><strong>Nombre:</strong> {{ orden_compra.proveedor.name }}</li>
+        <li class="list-group-item"><strong>Correo electrónico:</strong> {{ orden_compra.correo_proveedor }}</li>
+        <li class="list-group-item"><strong>Dirección:</strong> {{ orden_compra.direccion_proveedor }}</li>
+        <li class="list-group-item"><strong>Identificación fiscal:</strong> {{ orden_compra.tax_id }}</li>
+        <li class="list-group-item"><strong>Ciudad:</strong> {{ orden_compra.ciudad_proveedor }}</li>
+        <li class="list-group-item"><strong>Nombre del contacto:</strong> {{ orden_compra.nombre_contacto_proveedor }}</li>
+        <li class="list-group-item"><strong>Número de teléfono del contacto:</strong> {{ orden_compra.numero_contacto_proveedor }}</li>
+        <li class="list-group-item"><strong>Método de entrega:</strong> {{ orden_compra.metodo_entrega_proveedor }}</li>
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <h2>Producto</h2>
+      <ul class="list-group">
+        <li class="list-group-item"><strong>Nombre:</strong> {{ orden_compra.nombre_producto.name }}</li>
+        <li class="list-group-item"><strong>Precio:</strong> {{ orden_compra.precio_producto }}</li>
+        <li class="list-group-item"><strong>UPC:</strong> {{ orden_compra.upc }}</li>
+        <li class="list-group-item"><strong>SKU:</strong> {{ orden_compra.sku }}</li>
+      </ul>
+    </div>
+    <div class="row">
+      
+        <div class="col-md-12 text-center">          
+            <a href="{% url 'ordenes' %}" class="btn btn-secondary btn-sm">Regresar</a>            
+            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#eliminar-orden">Eliminar</button>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Modal para confirmar eliminación de orden de compra -->
+<div class="modal fade" id="eliminar-orden" tabindex="-1" role="dialog" aria-labelledby="eliminar-orden-titulo" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="eliminar-orden-titulo">Eliminar Orden de Compra</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          ¿Estás seguro de que quieres eliminar esta orden de compra?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+          <form action="{% url 'eliminar_orden_compra' pk=orden_compra.pk %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm" id="eliminar-orden">Eliminar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}    
+  

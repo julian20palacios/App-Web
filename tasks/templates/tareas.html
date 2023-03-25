@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Tareas</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Descripción</th>
+                <th>Creado</th>
+                <th>Completado</th>
+                <th>Importante</th>
+                <th>Usuario</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.created }}</td>
+                    <td>{{ task.datecomplated }}</td>
+                    <td>{{ task.important }}</td>
+                    <td>{{ task.user.username }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'export-to-excel' %}" class="btn btn-primary">Exportar</a>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'styleoc.css' %}">
+<div class="container">
+  <h1 class="text-center mb-4">Productos de los Proveedores</h1>
+
+  
+  <div class="d-flex mb-4 align-items-center">
+    <h4 class="mb-0">Opciones:</h4>
+    <a href="{% url 'exportar_productos_vendor_excel' %}" class="btn btn-outline-secondary ml-auto">
+      Exportar Datos...
+    </a>
+    <a href="{% url 'buscar_productos_proveedor' %}" class="btn btn-outline-secondary ml-auto">
+      Buscar...
+    </a>
+    <a href="{% url 'crear_producto_proveedor' %}" class="btn btn-outline-secondary ml-auto">
+      Crear Producto...
+    </a>
+    <a href="{% url 'productos/modelos' %}" class="btn btn-outline-secondary ml-auto">
+      Ver pareto...
+    </a>  
+        <!-- Eliminar todos los productos -->
+<form method="post" action="{% url 'eliminar_productos' %}">
+  {% csrf_token %}
+  <button class="btn btn-outline-secondary ml-auto">Eliminar Datos </button>
+</form>
+<a href="{% url 'chart' %}" class="btn btn-outline-secondary ml-auto">
+  ¡Graficar!
+</a>
+  </div>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>UPC</th>
+          <th>Producto</th>
+          <th>Proveedor</th>
+          <th>Precio</th>
+          <th>Cantidad disponible</th>    
+        </tr>
+      </thead>
+      <tbody>
+        {% for productoproveedor in productoproveedor %}
+        <tr>  
+          <td>{{ productoproveedor.upc }}</td>          
+          <td>{{ productoproveedor.nombre }}</td>
+          <td>{{ productoproveedor.proveedor }}</td>
+          <td>{{ productoproveedor.precio }}</td>
+          <td>{{ productoproveedor.cantidad_disponible }}</td>
+          
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+    <!-- Importar -->
+    <form method="post" enctype="multipart/form-data" action="{% url 'importar_datos' %}" style="margin-right: 20px;">
+      {% csrf_token %}
+      <div class="form-group mb-0">
+        <label for="archivo" class="mr-2">Seleccionar archivo:</label>
+        <input type="file" name="archivo" id="archivo">
+      </div>  
+      <button class="btn btn-outline-secondary btn-sm">Importar datos</button>
+    </form>
+    
+
+
+{% endblock %}

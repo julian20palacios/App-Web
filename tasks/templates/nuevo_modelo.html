@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'styleoc.css' %}">
+
+<main class="container">
+    <div class="row">
+        <h1 class="text-center">Pareto de Productos de Procurement</h1>
+        <div class="col-md-12">          
+        <!-- Botones -->
+            <form method="POST" action="{% url 'actualizar_datos' %}">
+                {% csrf_token %}
+                <input type="hidden" name="accion" value="actualizar_todo">
+                <button type="submit" class="btn btn-outline-secondary d-inline-block">Actualizar todos los datos</button>
+            </form>          
+            <a href="{% url 'crear_nuevo_modelo' %}" class="btn btn-outline-secondary d-inline-block">Crear Producto para el Pareto</a>
+            <a href="{% url 'buscar_productos_proveedor' %}" class="btn btn-outline-secondary d-inline-block">Ver opciones de proveedores</a>
+            <form method="POST" action="{% url 'eliminar_datos' %}">
+                {% csrf_token %}
+                <input type="hidden" name="accion" value="eliminar_datos">
+                <button type="submit" class="btn btn-outline-secondary d-inline-block">Eliminar datos</button>
+            </form>
+            <!-- Botones -->
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Proveedor</th> 
+                                <th>Precio</th>
+                                <th>Cantidad Disponible</th>
+                                <th>UPC</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for modelo in modelos %}
+                            <tr>                               
+                                <td><a href="{% url 'productos_modelo' modelo.nombre %}" class="text-dark text-decoration-none">{{ modelo.nombre }}</a></td>
+                                <td>{{ modelo.proveedor }}</td>
+                                <td>{{ modelo.precio }}</td>
+                                <td>{{ modelo.cantidad_disponible }}</td>
+                                <td>{{ modelo.upc }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>           
+    </div> 
+</main>
+
+{% endblock %}
+

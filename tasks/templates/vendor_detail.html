@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-center">{{ proveedor.nombre }}</h1>
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Dirección:</strong> {{ proveedor.direccion }}</li>
+                <li class="list-group-item"><strong>Nombre de contacto:</strong> {{ proveedor.contacto_nombre }}</li>
+                <li class="list-group-item"><strong>Número de contacto:</strong> {{ proveedor.contacto_numero }}</li>
+                <li class="list-group-item"><strong>Correo electrónico:</strong> {{ proveedor.correo_electronico }}</li>
+                <li class="list-group-item"><strong>Marca potencial:</strong> {{ proveedor.marca_potencial }}</li>
+                <li class="list-group-item"><strong>Categoría potencial:</strong> {{ proveedor.categoria_potencial }}</li>
+                <li class="list-group-item"><strong>Factoring:</strong> {{ proveedor.factoring }}</li>
+                <li class="list-group-item"><strong>Página web:</strong> {{ proveedor.pagina_web }}</li>
+                <li class="list-group-item"><strong>Cuenta con crédito:</strong> {% if proveedor.credito_aprobado %}Sí{% else %}No{% endif %}</li>
+                <li class="list-group-item"><strong>Documentos completos:</strong> {% if proveedor.documentos_completos %}Sí{% else %}No{% endif %}</li>
+                <li class="list-group-item"><strong>Crédito:</strong> {{ proveedor.credito }}</li>
+                <li class="list-group-item"><strong>Comentarios:</strong> {{ proveedor.comentarios }}</li>
+            </ul>
+        </div>
+    </div>
+</main>
+{% endblock %}

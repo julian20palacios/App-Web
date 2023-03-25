@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main class="container">
+    <div class="row">
+        <h1 class="text-center">Listado de Proveedores</h1>
+        <div class="col-md-12">          
+            <div class="mb-4 dropdown">
+                <button class="btn btn-secondary  dropdown-toggle" type="button" id="opciones-producto" data-bs-toggle="dropdown" aria-expanded="false">
+                    Opciones de Proveedor
+                </button>
+                <ul class="dropdown-menu dropdown-menu-sm" aria-labelledby="opciones-producto">
+                    <li><a class="dropdown-item dropdown-item-sm" href="{% url 'crearproveedor' %}">Crear Proveedor</a></li>
+                    <li><a class="dropdown-item dropdown-item-sm" href="{% url 'export-vendor-excel' %}">Exportar Proveedor</a></li>
+                </ul>
+            </div>
+            <div class="row">
+            {% for vendor in vistavendor %}
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            {% if vendor.is_purchased %}
+                            <h1 class="fw-bold text-muted">{{vendor.company_name}}</h1>                            
+                            {% else %}
+                            <h1 class="card-title fw-bold text-danger">{{vendor.company_name}}</h1>                          
+                            {% endif %}
+                            <p style="font-size: 0.8rem; color: black;">Potential brand: {{vendor.potential_brand}}</p>
+                            <a href="{% url 'detalle_proveedor' vendor.pk %}" class="btn btn-secondary btn-sm">Ver detalles</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>           
+    </div> 
+</main>
+{% endblock %}

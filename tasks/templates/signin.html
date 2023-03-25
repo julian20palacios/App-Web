@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main class="container">
+  <div class="row">
+    <div class="col-md-4 offset-md-4 mt-5">
+      <form method="POST" class="card card-body">
+        <h1 class="text-center">Inicio de sesión</h1>
+        {% if error %}
+        <div class="alert alert-danger"><b>{{ error }}</b></div>
+        {% endif %}
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="username">Email:</label>
+          <input type="text" name="username" id="username" class="form-control" placeholder="Escribe tu Usuario">
+        </div>
+        <div class="mb-3">
+          <label for="password">Password:</label>
+          <input type="password" name="password" id="password" class="form-control" placeholder="Escribe tu contraseña">
+        </div>
+        <button class="btn btn-dark">
+          Iniciar sesión
+        </button>
+      </form>
+    </div>
+  </div>
+</main>
+
+<script>
+  var errorAlert = document.querySelector(".alert-danger");
+
+  if (errorAlert) {
+    var inputFields = document.querySelectorAll(".form-control");
+    for (var i = 0; i < inputFields.length; i++) {
+      inputFields[i].classList.add("is-invalid");
+    }
+  }
+</script>
+
+{% endblock %}

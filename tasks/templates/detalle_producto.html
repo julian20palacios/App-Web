@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="text-center mb-5">{{producto.nombre_producto}}</h1>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="text-muted">Información General</h3>
+                    <hr>
+                    <p><strong>SKU:</strong> {{producto.sku}}</p>
+                    <p><strong>UPC:</strong> {{producto.upc}}</p>
+                    <p><strong>Precio USD:</strong> ${{producto.precio_usd}}</p>
+                    <p><strong>Categoría:</strong> {{producto.categoria}}</p>
+                    <p><strong>Marca:</strong> {{producto.marca}}</p>
+                    <p><strong>Proveedor sugerido:</strong> {{producto.proveedor_sugerido}}</p>
+                    <p><strong>Arancel:</strong> ${{producto.arancel}}</p>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="text-muted">Información Adicional</h3>
+                    <hr>
+                    <p><strong>Importante:</strong></p>
+                    <div class="form-check form-switch mb-4">
+                        <input class="form-check-input" type="checkbox" id="check_importante" {% if producto.check_importante %}checked{% endif %} disabled>
+                        <label class="form-check-label" for="check_importante">{% if producto.check_importante %}Sí{% else %}No{% endif %}</label>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <a href="{% url 'productos' %}" class="btn btn-secondary btn-sm">Regresar</a>
+                    <button class="btn btn-danger btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#eliminarProducto">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Modal PARA ELIMINAR EL REGISTRO-->
+<div class="modal fade" id="eliminarProducto" tabindex="-1" aria-labelledby="eliminarProductoLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="eliminarProductoLabel">Eliminar Articulo</h5>
+        <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿Estás seguro de que deseas eliminar este articulo?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+        <form action="{% url 'eliminar_producto' producto.pk %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Agregamos la hoja de estilos personalizada con las animaciones -->
+<link rel="stylesheet" type="text/css" href="{% static 'animacion2.css' %}">
+
+<!-- Creamos un contenedor para el contenido -->
+<div class="container">
+  <h1 class="mt-5">Personas</h1>
+  <ul id="personas-list" class="list-group">
+    {% for persona in personas %}
+      <li class="persona-item list-group-item animated fadeIn" data-id="{{ persona.id }}">
+        <div class="row align-items-center">
+          <div class="col-sm-4">
+            {% if persona.foto %}
+            <img class="persona-foto img-fluid animated pulse" src="{{ media.fotos_url }}{{ persona.foto.url }}" alt="{{ persona.nombre }}">
+            {% endif %}
+          </div>
+          <div class="col-sm-8">
+            <h3 class="persona-nombre">{{ persona.nombre }}</h3>
+            <p class="persona-edad mb-0">Edad: {{ persona.edad }}</p>
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<!-- Agregamos los scripts de Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- Agregamos el script personalizado con las animaciones -->
+<script src="{% static 'animacion2.js' %}"></script>
+
+{% endblock %}

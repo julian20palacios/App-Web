@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'stylepro.css' %}">
+<main class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-4 mt-5">
+            <form action="/crear_persona/" method="POST" class="card card-body animate-fade-in" enctype="multipart/form-data">
+                <h4>Crear Usuario</h4>
+                {{error}}
+                {% csrf_token %}
+                {{form.as_p}}
+                <button class="btn btn-dark btn-sm">
+                    Guardar    
+                </button>
+                <a href="{% url 'aboutme' %}" class="btn btn-secondary btn-sm">Cancelar</a>
+            </form>
+        </div>
+    </div>  
+</main>
+{% endblock %}

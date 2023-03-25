@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'animacion.css' %}">
+<script src="{% static 'animacion.js' %}"></script>
+  <div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card mt-5 hover-effect tarjeta-personalizada align-self-start">
+      <div class="card-body py-5">
+        <h1 class="card-title text-center">¡Datos Importados con Éxito!</h1>
+        <div class="d-flex justify-content-center">
+          <a href="{% url 'product_vendor' %}" class="btn btn-outline-secondary mt-3 ml-auto align-self-end">Ver datos Importados...</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

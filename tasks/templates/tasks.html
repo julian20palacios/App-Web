@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-center">Tareas</h1>
+            <ul class="list-group">
+                {% for task in tasks %}
+                <a class="list-group-item" >     
+                    <header class="d-flex justify-content-between">
+                        {% if task.important %}
+                        <h1 class="fw-bold text-danger ">{{task.title}}</h1>
+                        {% else %}
+                        <h1 class="fw-bold text-muted">{{task.title}}</h1>
+                        {% endif %}
+                        <p>{{task.user.username}}</p>  
+                    </header>                             
+                        <h6>{{task.description}}</h6>
+                        <h7>{{task.created}}</h7>
+                        <a class="btn btn-dark" href="{% url 'task_detail' task.id %}">
+                            Editar Publicación
+                        </a>                        
+                    {% endfor %}
+                </a>
+            <ul>
+        </div>           
+    </div>
+</main>
+{% endblock %}
+

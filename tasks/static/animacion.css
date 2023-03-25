@@ -1,0 +1,107 @@
+.hover-effect {
+    transition: all 0.3s ease-out;
+    transform-style: preserve-3d;
+    cursor: pointer;
+  }
+  
+  .hover-effect:hover {
+    transform: translateY(-15px) rotateX(10deg);
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .hover-effect .card-body {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .hover-effect:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotateX(90deg);
+    background-color: rgba(255, 255, 255, 0.2);
+    z-index: -1;
+    transition: all 0.3s ease-out;
+  }
+  
+  .hover-effect:hover:before {
+    transform: rotateX(0deg);
+  }
+
+  
+/* Estilo para el botón */
+.btn-outline-secondary {
+    border: 2px solid #444444;
+    color: #444444;
+    padding: 8px 16px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease-out;
+  }
+  
+  .btn-outline-secondary:hover {
+    color: #fff;
+    border-color: #fff;
+  }
+  
+  .btn-outline-secondary::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.5s cubic-bezier(0.5, 1.6, 0.4, 0.9);
+    z-index: -1;
+  }
+  
+  .btn-outline-secondary:hover::before {
+    width: 200%;
+    height: 200%;
+  }
+  
+  .btn-outline-secondary:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  }
+  
+  .btn-outline-secondary {
+    border-radius: 20px;
+    margin-left: 10px;
+    font-size: 14px;
+    border: 1px solid #ced4da;
+    outline: none;
+  }
+
+  .tarjeta-personalizada {
+    margin-top: 40px; /* ajuste la cantidad de píxeles según sea necesario */
+  }
+  
+  .my-card-width {
+    max-width: 800px; /* Define el ancho máximo deseado */
+  }
+  
+  
+  .card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-top: 5rem;
+    max-width: 600px;
+    padding: 2rem;
+  }
+  .card h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  
+  
+  
