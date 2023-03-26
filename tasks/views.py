@@ -48,16 +48,12 @@ def grafica(request):
     plt.savefig(buffer, format='png')
     buffer.seek(0)
     image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8').replace('\n', '')
-
-    
+ 
     context = {
         'image': image_base64
     }
-
-    # Renderizar la plantilla
     return render(request, 'grafica.html', context)
 
-# HighChart
 def chart(request):
     return render(request, 'chart.html')
 
