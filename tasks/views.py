@@ -30,27 +30,26 @@ import base64, json
 # ------------------------------- Graficar -------------------------------# 
 
 def grafica(request):
-    # Obtener los datos del modelo
     productos = ProductosProveedor.objects.all()
 
-    # Procesar los datos para crear la gráfica
+    
     nombres = [producto.proveedor for producto in productos]
     precios = [producto.precio for producto in productos]
 
-    # Crear la gráfica con Matplotlib
+    
     fig, ax = plt.subplots()
     ax.bar(nombres, precios)
     ax.set_xlabel('Nombre de Proveedor')
     ax.set_ylabel('Precios')
     ax.set_title('Análisis Gráfico')
 
-    # Convertir la gráfica a una cadena de bytes
+    
     buffer = BytesIO()
     plt.savefig(buffer, format='png')
     buffer.seek(0)
     image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8').replace('\n', '')
 
-    # Pasar los datos de la gráfica a la plantilla
+    
     context = {
         'image': image_base64
     }
